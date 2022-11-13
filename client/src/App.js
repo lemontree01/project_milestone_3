@@ -1,10 +1,9 @@
-import logo from './logo.svg';
-import './App.css';
+import AppRouter from "./AppRouter";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-     
+    <div>
+     <AppRouter />
     </div>
   );
 }
