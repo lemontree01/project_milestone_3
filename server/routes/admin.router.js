@@ -8,6 +8,8 @@ adminRouter.get('/getpatients', AdminController.getPatients)
 adminRouter.post('/modifypatient', AdminController.modifyPatient)
 adminRouter.post('/createdoctor', AdminController.createDoctor)
 adminRouter.get('/getdoctors', AdminController.getDoctors)
-adminRouter.post('/modifydoctors', AdminController.modifyDoctors)
+adminRouter.post('/modifydoctor', AdminController.modifyDoctors)
+adminRouter.delete('/deletedoctor/:_id', AdminController.deleteDoctor)
+adminRouter.delete('/deletepatient/:_id', AdminController.deletePatient)
 
 module.exports = adminRouter

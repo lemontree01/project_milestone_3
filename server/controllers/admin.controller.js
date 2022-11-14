@@ -237,6 +237,38 @@ class AdminController {
     }
   }
 
+  static async deleteDoctor(req, res) {
+    try {
+      const { _id } = req.params
+      const doctor = await Doctor.findOne({_id})
+      await doctor.remove()
+      return res.status(200).json({
+        message: "Deleted doctor successfully"
+    })
+    } catch (e) {
+      console.log(e);
+      return res.status(402).json({
+        message: "Delete doctors error"
+      })
+    }
+  }
+
+  static async deletePatient(req, res) {
+    try {
+      const { _id } = req.params
+      const patient = await Patient.findOne({_id})
+      await patient.remove()
+      return res.status(200).json({
+        message: "Deleted patient successfully"
+    })
+    } catch (e) {
+      console.log(e);
+      return res.status(402).json({
+        message: "Delete patient error"
+      })
+    }
+  }
+
   static async modifyDoctors(req, res) {
     try {
       const {

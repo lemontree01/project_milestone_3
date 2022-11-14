@@ -6,13 +6,15 @@ const SET_ADDING_DOCTORS_ERROR = "SET_ADDING_DOCTORS_ERROR"
 const REMOVE_ADDING_DOCTORS_ERROR = "REMOVE_ADDING_DOCTORS_ERROR"
 const SET_GETTING_PATIENTS_ERROR = "SET_GETTING_PATIENTS"
 const REMOVE_GETTING_PATIENTS_ERROR = "REMOVE_GETTING_PATIENTS_ERROR"
-
+const SET_IS_DELETING_DOCTOR_ERROR = "SET_IS_DELETING_DOCTOR_ERROR"
+const REMOVE_IS_DELETING_DOCTOR_ERROR= "REMOVE_IS_DELETING_DOCTOR_ERROR"
 
 const initialState = {
   loginError: null,
   gettingDoctorsError: null,
   addingDoctorsError: null,
   gettingPatientsError: null,
+  deletingDoctorError: null,
 }
 
 export const errorReducer = (state = initialState, action) => {
@@ -57,6 +59,16 @@ export const errorReducer = (state = initialState, action) => {
         ...state,
         gettingPatientsError: null,
         } 
+    case SET_IS_DELETING_DOCTOR_ERROR:
+      return {
+        ...state,
+        deletingDoctorError: action.payload,
+      }    
+      case REMOVE_IS_DELETING_DOCTOR_ERROR:
+        return {
+          ...state,
+          deletingDoctorError: null,
+        }
     default:
       return state   
   }
@@ -96,4 +108,13 @@ export const setAddingDoctorsError = error => ({
 
 export const removeAddingDoctorsError = () => ({
   type: REMOVE_ADDING_DOCTORS_ERROR,
+})
+
+export const setDeletingDoctorError = error => ({
+  type: SET_IS_DELETING_DOCTOR_ERROR,
+  payload: error,
+})
+
+export const removeDeletingDoctorError = () => ({
+  type: REMOVE_IS_DELETING_DOCTOR_ERROR,
 })

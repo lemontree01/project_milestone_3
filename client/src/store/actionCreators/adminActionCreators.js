@@ -1,8 +1,8 @@
 import { Dispatch } from "redux"
 import axiosInstance from './../../api/index.api';
 import { setAllDoctors } from "../reducers/admin.reducer";
-import { removeGettingDoctorsError, setGettingDoctorsError, removeAddingDoctorsError, setAddingDoctorsError } from './../reducers/error.reducer';
-import { stopGettingDoctorsLoading, setGettingDoctorsLoading, setAddingDoctorsLoading, stopAddingDoctorsLoading } from './../reducers/loading.reducer';
+import { removeGettingDoctorsError, setGettingDoctorsError, removeAddingDoctorsError, setAddingDoctorsError, removeDeletingDoctorError, setDeletingDoctorError } from './../reducers/error.reducer';
+import { stopGettingDoctorsLoading, setGettingDoctorsLoading, setAddingDoctorsLoading, stopAddingDoctorsLoading, setIsDeletingDoctorLoading, stopIsDeletingDoctorLoading } from './../reducers/loading.reducer';
 
 
 export const getAllDoctors = () => async dispatch => {
@@ -22,7 +22,8 @@ export const getAllDoctors = () => async dispatch => {
 export const createDoctor = doctor => async dispatch => {
   try {
     dispatch(setAddingDoctorsLoading())
-    const {data} = await axiosInstance.post('/admin/createdoctor', doctor)
+    await axiosInstance.post('/admin/createdoctor', doctor)
+    const {data} = await axiosInstance.get('/admin/getdoctors')
     dispatch(setAllDoctors(data))
     dispatch(removeAddingDoctorsError())
   } catch (e) {
@@ -33,3 +34,27 @@ export const createDoctor = doctor => async dispatch => {
   }
 }
 
+export const deleteDoctor = _id => async dispatch => {
+  try {
+    dispatch(setIsDeletingDoctorLoading())
+    await axiosInstance.delete('/admin/deletedoctor/' + _id)
+    const {data} = await axiosInstance.get('/admin/getdoctors')
+    dispatch(setAllDoctors(data))
+    dispatch(removeDeletingDoctorError())
+  } catch(e) {
+    dispatch(setDeletingDoctorError(e?.response?.data?.message ?? 'Error with server'))
+  } finally {
+    dispatch(stopIsDeletingDoctorLoading())
+  }
+}
+
+export const modifyDoctor = doctor => async dispatch => {
+  try {
+    await axiosInstance.post('/admin/modifydoctor', doctor)
+    const {data} = await axiosInstance.get('/admin/getdoctors')
+    dispatch(setAllDoctors(data))
+  }
+  catch(e) {
+    
+  }
+}
