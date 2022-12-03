@@ -28,11 +28,11 @@ const dispatch = useDispatch()
   
 
   return (
-    <div>
+    <div className={styles.main}>
       <h1>DenSys.me</h1>
-      <div>
-        <input type="text" 
-        value={username} 
+      <div className={styles.form}>
+        <input type="text"
+        value={username}
         onChange={loginHandler}
         placeholder={"login"}
         />
@@ -48,7 +48,7 @@ const dispatch = useDispatch()
         }
         {
           loginError && (
-            <div>{loginError}</div>
+            <div style={{color: 'red', marginTop: 10}}>{loginError}</div>
           )
         }
       </div>

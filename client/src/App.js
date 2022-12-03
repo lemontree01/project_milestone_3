@@ -1,8 +1,8 @@
 import AppRouter from "./AppRouter";
-
+import "./App.css"
 const App = () => {
   return (
-    <div>
+    <div className="mainc">
      <AppRouter />
     </div>
   );

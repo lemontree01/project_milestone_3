@@ -1,0 +1,22 @@
+.main {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.main > p {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.button {
+  display: flex;
+  flex-direction: row;
+}
+
+.button > button {
+  width: 100px;
+  height: 20px;
+  background-color: white;
+  border: 1px solid black;
+}
