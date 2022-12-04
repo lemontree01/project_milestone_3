@@ -11,5 +11,6 @@ adminRouter.get('/getdoctors', AdminController.getDoctors)
 adminRouter.post('/modifydoctor', AdminController.modifyDoctors)
 adminRouter.delete('/deletedoctor/:_id', AdminController.deleteDoctor)
 adminRouter.delete('/deletepatient/:_id', AdminController.deletePatient)
+adminRouter.get('/appoitments', AdminController.getAppointments)
 
 module.exports = adminRouter

@@ -3,7 +3,8 @@ const LOGOUT = 'LOGOUT'
 
 const initialState = {
   isLogin: false,
-  login: null
+  login: null,
+  role: null
 }
 
 export const userReducer = (state = initialState, action) => {
@@ -11,7 +12,8 @@ export const userReducer = (state = initialState, action) => {
     case LOGIN:
       return {
         ...state,
-        login: action.payload,
+        login: action.login,
+        role: action.role,
         isLogin: true,
       }
     case LOGOUT:
@@ -25,9 +27,10 @@ export const userReducer = (state = initialState, action) => {
   }
 }
 
-export const setUser = (login) => ({
+export const setUser = (login, role) => ({
   type: LOGIN,
-  payload: login
+  login,
+  role,
 })
 
 export const removeUser = () => ({

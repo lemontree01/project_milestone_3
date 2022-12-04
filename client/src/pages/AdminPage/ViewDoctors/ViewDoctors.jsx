@@ -13,6 +13,7 @@ const ViewDoctors = () => {
   }, [isCreateDoctorShown])
 
   const doctors = useSelector(state => state.admin.doctors)
+  console.log(doctors)
   const isGettingDoctorsLoading = useSelector(state => state.loading.isGettingDoctorsLoading)
 
   const deleteDoctorHandler = (_id) => {
@@ -32,7 +33,7 @@ const ViewDoctors = () => {
       <div>Loading...</div> :
       <div className={styles.doctor_list}>
         {doctors.map(doctor => (
-         <DoctorElement doctor={doctor} deleteDoctorHandler={deleteDoctorHandler}/>
+         <DoctorElement key={doctor._id} doctor={doctor} deleteDoctorHandler={deleteDoctorHandler}/>
         ))
 
       }
@@ -159,7 +160,7 @@ const DoctorElement = ({doctor, deleteDoctorHandler}) => {
       <div>departmentID: {doctor.departmentID} </div>
       <div>specializationDetailsID: {doctor.specializationDetailsID} </div>
       <div>experience: {doctor.experience} </div>
-      <div>photo: {doctor.photo} </div>
+      {/* <div>photo: {doctor.photo} </div> */}
       <div>category: {doctor.category} </div>
       <div>price: {doctor.price} </div>
       <div>scheduleDetails: {doctor.scheduleDetails} </div>

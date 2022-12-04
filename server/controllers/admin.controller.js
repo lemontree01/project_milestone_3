@@ -1,6 +1,7 @@
 const Admin = require('../schemas/admin.schema')
 const Doctor = require('../schemas/doctor.schema')
 const Patient = require('../schemas/patient.schema')
+const Appointment = require("../schemas/appointment.schema")
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
 
@@ -9,33 +10,34 @@ class AdminController {
     try {
       const { login, password } = req.body
       const admin = await Admin.findOne({login})
+      const patient = await Patient.findOne({login})
 
-      if(!admin) {
-        console.log('Admin does not exist');
-        return res.status(400).json({
-          message: "No user found"
-        })
-      }
-
-      if(password !== admin.password) {
+      if(admin && password !== admin.password) {
         console.log('wrong password')
         return res.status(400).json({
           message: "Wrong password"
         })
       }
 
+      if(patient && password !== patient.password) {
+        console.log('wrong password')
+        return res.status(400).json({
+          message: "Wrong password"
+        })
+      }
+
+      if(!admin && !patient) {
+        console.log('Admin does not exist');
+        return res.status(400).json({
+          message: "No user found"
+        })
+      }
+
       console.log('successful login');
 
-      const token = jwt.sign({
-        _id: admin._id,
-      },
-      process.env.jwtAccessKey, {
-        expiresIn: "1h",
-      }
-      )
-
       return res.status(200).json({
-        token, login
+       login,
+       role: admin ? 'admin' : 'patient'
       })
     }
     catch(e) {
@@ -321,6 +323,20 @@ class AdminController {
       console.log(e);
       return res.status(402).json({
         message: "Modify doctors error"
+      })
+    }
+  }
+
+  static async getAppointments(req, res) {
+    try {
+      const appointments = await Appointment.find({})
+      return res.status(200).json({
+        message: appointments
+      })
+    }
+    catch (e) {
+      return res.status(400).json({
+        message: "Error fetching appointments"
       })
     }
   }

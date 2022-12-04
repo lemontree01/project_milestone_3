@@ -17,7 +17,7 @@ export const login = (login, password) => async dispatch => {
       login, password
     })
   
-    dispatch(setUser(login))
+    dispatch(setUser(login, response.data.role))
     dispatch(removeLoginError())
   } catch (e) {
     dispatch(setLoginError(e?.response?.data?.message ?? 'Error with server'))

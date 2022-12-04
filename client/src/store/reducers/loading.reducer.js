@@ -6,8 +6,12 @@ const SET_IS_GETTING_DOCTORS_LOADING = "SET_IS_GETTING_DOCTORS_LOADING"
 const STOP_IS_GETTING_DOCTORS_LOADING = "STOP_IS_GETTING_DOCTORS_LOADING"
 const SET_IS_ADDING_DOCTORS_LOADING = "SET_IS_ADDING_DOCTORS_LOADING"
 const STOP_IS_ADDING_DOCTORS_LOADING = "STOP_IS_ADDING_DOCTORS_LOADING"
+const SET_IS_ADDING_PATIENTS_LOADING = "SET_IS_ADDING_PATIENTS_LOADING"
+const STOP_IS_ADDING_PATIENTS_LOADING = "STOP_IS_ADDING_PATIENTS_LOADING"
 const SET_IS_DELETING_DOCTOR_LOADING = "SET_IS_DELETING_DOCTOR_LOADING"
 const STOP_IS_DELETING_DOCTOR_LOADING = "STOP_IS_DELETING_DOCTOR_LOADING"
+const SET_IS_DELETING_PATIENT_LOADING = "SET_IS_DELETING_PATIENT_LOADING"
+const STOP_IS_DELETING_PATIENT_LOADING = "STOP_IS_DELETING_PATIENT_LOADING"
 
 const initialState = {
   isLoginLoading: false,
@@ -15,10 +19,32 @@ const initialState = {
   isAddingDoctorsLoading: false,
   isGettingDoctorsLoading: false,
   isDeletingDoctorLoading: false,
+  isAddingPatientsLoading: false,
+  isDeletingPatientLoading: false
 }
 
 export const loadingReducer = (state = initialState, action) => {
   switch(action.type) {
+    case SET_IS_ADDING_PATIENTS_LOADING:
+      return {
+        ...state,
+        isAddingPatientsLoading: true,
+      }
+    case STOP_IS_ADDING_PATIENTS_LOADING:
+      return {
+        ...state,
+        isAddingPatientsLoading: false,
+      } 
+    case SET_IS_DELETING_PATIENT_LOADING:
+      return {
+        ...state,
+        isDeletingPatientLoading: true,
+      }
+    case STOP_IS_DELETING_PATIENT_LOADING: 
+      return {
+        ...state,
+        isDeletingPatientLoading: false,
+      }
     case STOP_LOGIN_LOADING:
       return {
         ...state,
@@ -103,8 +129,16 @@ export const setAddingDoctorsLoading = () => ({
   type: SET_IS_GETTING_DOCTORS_LOADING
 })
 
+export const setAddingPatientsLoading = () => ({
+  type: SET_IS_ADDING_PATIENTS_LOADING
+})
+
 export const stopAddingDoctorsLoading = () => ({
   type: STOP_IS_GETTING_DOCTORS_LOADING
+})
+
+export const stopAddingPatientsLoading = () => ({
+  type: STOP_IS_ADDING_PATIENTS_LOADING
 })
 
 export const setIsDeletingDoctorLoading = () => ({
@@ -114,3 +148,12 @@ export const setIsDeletingDoctorLoading = () => ({
 export const stopIsDeletingDoctorLoading = () => ({
   type: STOP_IS_DELETING_DOCTOR_LOADING
 })
+
+export const setIsDeletingPatientLoading = () => ({
+  type: SET_IS_DELETING_PATIENT_LOADING
+})
+
+export const stopIsDeletingPatientLoading = () => ({
+  type: STOP_IS_DELETING_PATIENT_LOADING
+})
+
