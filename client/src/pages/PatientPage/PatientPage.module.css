@@ -1,6 +1,12 @@
 .specializations {
   display: flex;
   flex-direction: row;
+  cursor: pointer;
+  gap: 5px;
+}
+
+.specializations > div:hover {
+  color: gold;
 }
 
 .main {

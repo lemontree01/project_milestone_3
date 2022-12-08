@@ -5,8 +5,8 @@ import styles from './LoginPage.module.css'
 import { useSelector, useDispatch } from 'react-redux';
 
 const LoginPage = () => {
-  const [username, setUsername] = useState('patient')
-  const [password, setPassword] = useState('patient')
+  const [username, setUsername] = useState('admin')
+  const [password, setPassword] = useState('adminpassword')
 const dispatch = useDispatch()
   const {login} = useActions()
 

@@ -19,3 +19,21 @@ export const searchDoctors = query => async dispatch => {
     dispatch(stopGettingDoctorsLoading())
   }
 }
+
+export const sendAppointment = (name,
+  surname,
+  contactDetails,
+  appointmentTime,
+  doctorID) => async dispatch => {
+    try {
+      await axiosInstance.post('/patient/makeAppointment', {name,
+        surname,
+        contactDetails,
+        appointmentTime,
+        doctorID
+      })
+      
+    } catch(e) {
+
+    }
+  }

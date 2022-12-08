@@ -1,6 +1,6 @@
 import { Dispatch } from "redux"
 import axiosInstance from './../../api/index.api';
-import { setAllDoctors } from "../reducers/admin.reducer";
+import { setAllAppointments, setAllDoctors } from "../reducers/admin.reducer";
 import { removeGettingDoctorsError, setGettingDoctorsError, removeAddingDoctorsError, setAddingDoctorsError, removeDeletingDoctorError, setDeletingDoctorError, removeGettingPatientsError, setGettingPatientsError, removeAddingPatientsError, setAddingPatientsError, removeDeletingPatientError, setDeletingPatientError } from './../reducers/error.reducer';
 import { stopGettingDoctorsLoading, setGettingDoctorsLoading, setAddingDoctorsLoading, stopAddingDoctorsLoading, setIsDeletingDoctorLoading, stopIsDeletingDoctorLoading, setGettingPatientsLoading, stopGettingPatientsLoading, setAddingPatientsLoading, stopAddingPatientsLoading, setIsDeletingPatientLoading, stopIsDeletingPatientLoading } from './../reducers/loading.reducer';
 import { setAllPatients } from './../reducers/admin.reducer';
@@ -111,5 +111,14 @@ export const modifyPatient = patient => async dispatch => {
   }
   catch(e) {
     
+  }
+}
+
+export const getAppointments = () => async dispatch => {
+  try {
+    const {data: {message: appointments}} = await axiosInstance.get('/admin/appoitments')
+    dispatch(setAllAppointments(appointments))
+  } catch(e) {
+    console.log(e)
   }
 }
